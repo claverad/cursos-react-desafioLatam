@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Tarea 1 del curso React - desafioLatam 
 
 ## Available Scripts
 
