@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import TableFilter from './components/TableFilter';
 import './App.css';
+import HeroTable from './components/HeroTable';
 
 const heroes = [
   { name: 'Gandalf', race: 'Maia', age: '2019', weapon: 'Staff 🏑' },
@@ -16,11 +17,18 @@ export default class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      filterText: '',
-      filteredHeroes: ''
+      filterText: ''
     }
+
+    this.handleInputChange = this.handleInputChange.bind(this)
+
   }
 
+  handleInputChange (e) {
+    this.state ({
+      filterText : e.target.value
+    })
+  }
 
   render() {
 
@@ -29,7 +37,7 @@ export default class App extends Component {
     let filteredHeroes = heroes
 
     if (filterText) {
-      filteredHeroes = heroes.filter(hero => {
+      filteredHeroes = filteredHeroes.filter(hero => {
         return hero.name.includes(filterText)
       })
     }
@@ -40,10 +48,15 @@ export default class App extends Component {
           <h2>Fellowship of the Ring</h2>
         <div className="container" />
         <TableFilter 
-          placeholder='search hero...'
-          filterText
+          filterText = { filterText }
+          handleChange = { this.handleInputChange }  
+          placeHolder = 'search hero...'
         />
         
+        {filteredHeroes.length > 0 && <HeroTable heroes={filteredHeroes} /> }
+
+        {filteredHeroes.length === 0 && <div>No heroes....</div> }
+
       </div>
     );
   }
